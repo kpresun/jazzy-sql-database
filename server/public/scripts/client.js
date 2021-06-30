@@ -19,7 +19,7 @@ function addArtist() {
     // Get info to send to the server
     const artistToSend = {
         name: $('#artist-name').val(), 
-        birthdate: $('#artist-born').val()
+        birthday: $('#artist-born').val()
     };
 
     console.log('Adding artist', artistToSend);
@@ -43,7 +43,7 @@ function addSong() {
     const newSong = {
         title: $('#song-name').val(), 
         length: $('#song-length').val(),
-        released: $('#song-released').val()
+        release: $('#song-released').val()
     };
 
     console.log('Adding song', newSong);
@@ -96,7 +96,7 @@ function renderArtists( listOfArtists ) {
         $('#artistTableBody').append(`
                 <tr>
                     <td>${artist.name}</td>
-                    <td>${artist.birthdate}</td>
+                    <td>${artist.birthday}</td>
                 </tr>`
         );
     }
@@ -111,7 +111,7 @@ function renderSongs(listOfSongs) {
                 <tr>
                     <td>${song.title}</td>
                     <td>${song.length}</td>
-                    <td>${song.released}</td>
+                    <td>${song.release}</td>
                 </tr>`
             );
     }
