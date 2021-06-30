@@ -82,8 +82,19 @@ app.get('/artist', (req, res) => {
 });
 
 app.post('/artist', (req, res) => {
-    artistList.push(req.body);
-    res.sendStatus(201);
+    const newArtist = req.body;
+    const queryText = `INSERT INTO artist ("name", "birthday")
+    VALUES ($1, $2);`;
+    pool.query(queryText, [newArtist.name, newArtist.birthday])
+    .then((results) => {
+        console.log('Made it to POST /artist');
+        res.send(results.rows);
+    })
+    .catch((err) => {
+        console.log(`Error making query ${queryText}`, err);
+        res.sendStatus(500);
+    })
+   
 });
 
 app.get('/song', (req, res) => {
@@ -101,8 +112,18 @@ app.get('/song', (req, res) => {
 });
 
 app.post('/song', (req, res) => {
-    songList.push(req.body);
-    res.sendStatus(201);
+    const newSong = req.body;
+    const queryText = `INSERT INTO song ("title", "length", "release")
+    VALUES($1, $2, $3);`;
+    pool.query(queryText, [newSong.title, newSong.length, newSong.release])
+    .then((results) => {
+        console.log('Made it to POST /artist');
+        res.send(results.row);
+    })
+    .catch((err) => {
+        console.log(`Error making query ${queryText}`, err);
+        res.sendStatus(500);
+    })
 });
 
 
